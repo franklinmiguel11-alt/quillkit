@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
-import { redirect } from "next/link"
+import { redirect } from "next/navigation"
 import { CreateTemplateWizard } from "@/components/templates/create-wizard"
 
 export default async function NewTemplatePage() {

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { validateApiKey } from '@/lib/auth/api-key'
 import { resend } from '@/lib/email/resend'
-import { DocumentInvitationEmail } from '@/lib/email/templates'
+import { SignRequestEmail } from '@/lib/email/templates'
 import { randomBytes } from 'crypto'
 
 export async function POST(request: Request) {
@@ -73,10 +73,10 @@ export async function POST(request: Request) {
                 from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
                 to: recipient.email,
                 subject: `Sign ${document.title}`,
-                react: DocumentInvitationEmail({
-                    inviterName: 'QuillKit User', // Could fetch user's name
+                react: SignRequestEmail({
+                    senderName: 'QuillKit User', // Could fetch user's name
                     documentTitle: document.title,
-                    inviteLink: signingLink,
+                    signingLink: signingLink,
                 }),
             })
         }
